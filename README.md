@@ -1,16 +1,14 @@
 # FiveCons
+Five Cons of Technical Interview
+ conStrain,conCeive,conTract,conStruct,conFirm
 
-Clarify Conceive Contract Code Confirm
-Clarify Collude Contract Code Confirm
-5C conStrain,conCeive,conTract,conStruct,conFirm
-
-CLARIFY (CONSTRAINTS)
+CONSTRAIN (CLARIFY)
 Ask clarifying questions
 (data structure, number of items and size/length of each item)
 Example (big enough not too large) 
 Suggest will take care of already sorted (increasing, decreasing, duplicates)
 
-CONCEIVE )COLLUDE
+CONCEIVE (COLLUDE)
 Brute force first
 Use all the data available in the question
 Try to find simple solution first, can you solve subset of the problem and then generalize?
@@ -30,7 +28,7 @@ Contract specifies arguments and return value
 Write Class or Function (best to use Class and main)
 C++ (use std::string for strings, vectors for arrays)
 
-CODE
+CONSTRUCT (CODE)
 Talk through the solution first before coding to make sure you’re on the same page with interviewer
 Say which language you are using to make sure interviewer knows what to expect
 Insure inputs (nulls, empty, sizes) are taken care of and return fast
@@ -49,9 +47,6 @@ Make sure program doesn’t crash
 Use Example first run. the examples you ran through would serve as test cases when you implement the algorithm and have to test your code.
 Use Edge Case examples - already sorted (increasing, decreasing, duplicates)
 Running time for Best, Worse Cases
-
-
-
 
 
 
