@@ -1,245 +1,98 @@
 #include <iostream>
 #include <vector>
-#include <string>
-#include <math.h>
-
+#include <unordered_map>
 
 using namespace std;
+
+/*
+
+Five Cons:
+
+#################
+
+Constrain: Leetcode gives constraints in their question 
+Conceive:  (up to you but best to use a white board and talk it out even to yourself or piece of paper before coding)
+Contract: function signature given by LeetCode
+Construct: Class created and implementation in public and private methods of Class
+Confirm: (tested in main using leetcode examples, testing by passing to leetcode submission)
+
+#################
+
+Constrain:  Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+            You may assume that each input would have exactly one solution, and you may not use the same element twice.
+            (ask:  negative numbers allowed?  yes
+             ask: is array sorted? no)
+
+Conceive:   (put ideas here from whiteboard , be honest)
+            since not sorted can't use binary search 
+            can use a map to store the complement = target - current element 
+            we map it to the index of the current element that is used
+            questions? 
+            do I need helper functions? NO.
+            recursion? NO
+
+Contract:   vector<int> twoSum(vector<int>& nums, int target)
+*/
+
+/* Construct */
+
+
+/*** LEETCODE ACCEPTANCE RESULTS
+ 
+    Success
+
+    Details 
+    Runtime: 8 ms, faster than 92.77% of C++ online submissions for Two Sum.
+    Memory Usage: 9.9 MB, less than 56.68% of C++ online submissions for Two Sum.
+
+***/
 
 class Solution {
 public:
 
-
-    vector<vector<int>> threeSum(vector<int>& nums) {
-
-        vector<vector<int>> result;
-            
-        if (nums.size() <= 2)
-            return result;
-
-
-
-
+    vector<int> twoSum(vector<int>& nums, int target) {
         
+        vector<int> result = {-1, -1};
 
-        return result;
+        /*  use a map to store requests for complements and the index of the requestor */
+        unordered_map<int,int> map;
 
-    }
-
-
-    string intToRoman(int num) {
-
-        
-
-    }
-
-
-    int maxAreaSlow(vector<int>& height) {
-
-
-        if (height.size() <= 1)
-            return 0;
-    
-        int maxA = 0;
-
-        for (int i = 0;i< height.size();i++)
+        for (int i = 0;i < nums.size();i++)
         {
-            for (int j= i+1; j < height.size();j++)
+            /* check our map if a request for a compliment is registered */
+            /* if registered then we have our compliment whose index is in the map */
+            if (map.find(nums[i]) != map.end())
             {
-                int area = 0;
-                area = min(height[i],height[j]);
-                area = area * (j-i);
-
-                if (area > maxA)
-                    maxA = area;
+                result[0] = i;
+                result[1] = map[nums[i]];
+                break;
             }
-        }   
-        
-        return maxA;
-    }
-    
-    int maxArea(vector<int>& height) {
+            /* store the compliment which is a request by the element at index i */
+            int complement = target - nums[i];
+            map[complement] = i;
 
-
-        if (height.size() <= 1)
-            return 0;
-    
-        int maxA = 0;
-
-
-        int i = 0;
-        int j = height.size() - 1;
-            
-        while ( i < j)
-        {
-            int area = 0;
-            area = min(height[i],height[j]);
-            area = area * (j-i);
-
-            if (area > maxA)
-                maxA = area;
-            
-            //
-            if (height[i] < height[j])
-                i++;
-            else
-                j--;
-        }   
-        
-        return maxA;
-    }
-
-
-    string convert(string s, int numRows) {
-
-        if (numRows <= 1)
-            return s;
-        
-        if (s.size() <= 1)
-            return s;
-
-        bool bDirDown = true;
-
-        int idx = 0;
-
-        int process = s.size();
-
-        vector<vector<string>> dp(numRows);
-
-        int i = 0;
-        int j = 0;
-
-        while (idx < process)
-        {
-            dp[i].resize(dp[i].size()+1);
-            dp[i][dp[i].size()-1] = s[idx++];
-
-            if (bDirDown)
-            {
-                
-                if (i == numRows -1)
-                {
-                    i--;
-                    bDirDown = false;    
-                }
-                else
-                {
-                    i++;               
-                }
-            }
-            else
-            {
-                if (i == 0)
-                {
-             
-                    i++;
-                    bDirDown = true;    
-                }
-                else
-                    i--;                
-            }
-
-        }
-
-        string result;
-
-        for (int i = 0;i < dp.size() ;i++)
-        {
-            vector<string> vec = dp[i];
-
-            for (int j = 0;j < vec.size();j++)
-            {
-                result = result.append(vec[j]);
-            }
         }
 
         return result;
 
     }
 
-    string longestPalindrome(string s) {
-
-        
-        vector<vector<bool>> dp(s.size(),vector<bool>(s.size()));
-
-        string longest;
-
-
-        if (s.size() == 0)
-            return longest;
-
-        if (s.size() == 1)
-            return s;
-        
-        // l  = 1
-
-        for (int i = 0;i < s.size();i++)
-        {
-            dp[i][i] = true;
-        }
-        int lIdx = 0;
-        int ls = 1;
-
-
-        // l = 2
-        for (int i = 0;i < s.size()-1;i++)
-        {
-            if (s[i] == s[i+1])
-            {
-                dp[i][i+1] = true;
-                lIdx = i;
-                ls = 2;
-            }
-        }
-
-        // l > 2
-
-        for (int l = 3;l <= s.size();l++)
-        {
-            for (int i = 0;i < s.size() - l + 1;i++)
-            {
-                int j = i + l - 1;
-
-                if ((s[i] == s[j]) && dp[i+1][j-1])
-                {
-                    dp[i][j] = true;
-                    lIdx = i;
-                    ls = l;
-                }
-
-            } 
-        }
-
-        longest = s.substr(lIdx,ls);
-        return longest;
-        
-    }
 };
+
+
+/* Confirm */
 
 int main()
 {
+    
+    vector<int> nums = {2, 7, 11, 15};
+   // vector<int> nums = {3, 2, 4};
 
     Solution sol;
+    vector<int> result = sol.twoSum(nums,9);
+ //   vector<int> result = sol.twoSum(nums,6);
 
-    string pal = "abaxabaxabb";
-
-    
-
-    //string result =   sol.longestPalindrome(pal);
-    string zigzag = "PAYPALISHIRING"; //PAHNAPLSIIGYIR
-
-    //string result = sol.convert(zigzag, 3);
-    //cout << result << endl;
-
-    vector<int> height = {1,8,6,2,5,4,8,3,7}; //49
-
-    vector<int> nums = {-1, 0, 1, 2, -1, -4}; 
-
-///    cout << sol.maxArea(height) << endl;
-    vector<vector<int>> result =  sol.threeSum(nums);
-
-    
-
-
-
+    cout << "result: " << endl;
+    cout << result[0] << endl;
+    cout << result[1] << endl;
 }
