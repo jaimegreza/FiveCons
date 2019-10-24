@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "taskName": "lc0001",
+            "label": "lc0001",
             "command": "g++",
             "type": "shell",
             "args": [
@@ -14,13 +14,23 @@
             ]
         },
         {
-            "taskName": "lc0002",
+            "label": "lc0002",
             "command": "g++",
             "type": "shell",
             "args": [
                 "-g",
                 "-std=c++14",
                 "c++/lc0002.cpp"
+            ]
+        },
+        {
+            "label": "lc0003",
+            "command": "g++",
+            "type": "shell",
+            "args": [
+                "-g",
+                "-std=c++14",
+                "c++/lc0003.cpp"
             ]
         }
     ]
