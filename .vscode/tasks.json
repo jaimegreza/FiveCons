@@ -12,6 +12,16 @@
                 "-std=c++14",
                 "c++/lc0001.cpp"
             ]
+        },
+        {
+            "taskName": "lc0002",
+            "command": "g++",
+            "type": "shell",
+            "args": [
+                "-g",
+                "-std=c++14",
+                "c++/lc0002.cpp"
+            ]
         }
     ]
 }
